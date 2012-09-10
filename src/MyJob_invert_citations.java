@@ -20,17 +20,17 @@ public class MyJob extends Configured implements Tool {
 	}
 	
 	public static class Reduce extends MapReduceBase
-	implements Reducer<Text, Text, Text, IntWritable> {
+	implements Reducer<Text, Text, Text, Text> {
 		
 		public void reduce(Text key, Iterator<Text> values,
-		OutputCollector<Text, IntWritable> output,
+		OutputCollector<Text, Text> output,
 		Reporter reporter) throws IOException {
-			int count = 0;
+			String csv = "";
 			while (values.hasNext()) {
-				values.next();
-				count++;
+				if (csv.length() > 0) csv += ",";
+				csv += values.next().toString();
 			}
-			output.collect(key, new IntWritable(count));
+			output.collect(key, new Text(csv));
 		}
 	}
 	
