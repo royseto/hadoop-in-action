@@ -8,5 +8,5 @@ hadoop jar $HS_JAR \
 -output output \
 -mapper 'scripts/AverageByAttributeMapper.py' \
 -file 'scripts/AverageByAttributeMapper.py' \
-#-D mapred.reduce.tasks=1
+-jobconf mapred.reduce.tasks=1
 
