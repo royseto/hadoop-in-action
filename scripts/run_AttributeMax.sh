@@ -9,5 +9,4 @@ hadoop jar $HS_JAR \
 -mapper 'scripts/AttributeMax.py 8' \
 -reducer 'scripts/AttributeMax.py 0' \
 -file 'scripts/AttributeMax.py' \
-#-D mapred.reduce.tasks=1
-
+-jobconf mapred.reduce.tasks=1 \
