@@ -2,6 +2,7 @@
 
 import sys, re, time
 
+# Compile a RE for the webserver log format
 log_format = [
     r'(?P<host>\S+)',                   # host %h
     r'\S+',                             # indent %l (unused)
@@ -15,6 +16,9 @@ log_format = [
 ]
 pattern = re.compile(r'\s+'.join(log_format))
 
+# Iterate through the logfile, writing the access time (truncated to the hour)
+# as the key and 1 as the value, prefixed by "LongValueSum:" for the Hadoop
+# streaming aggregate package.
 for line in sys.stdin:
     m = pattern.match(line)
     res = m.groupdict()
